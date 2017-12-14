@@ -8,6 +8,6 @@ using namespace System::Windows::Forms;
 void main(array<String^>^ args) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-	ZETLab7052::Reader form;
+	ZETLab7x52::Reader form;
 	Application::Run(%form);
 }

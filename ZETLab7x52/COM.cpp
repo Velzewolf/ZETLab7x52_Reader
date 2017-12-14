@@ -1,7 +1,5 @@
 #include <string>
 #include "cstdint"
-#include <windows.h>
-#include <iostream>
 #include "COM.h"
 
 //скорости, по которым будет проходить программа

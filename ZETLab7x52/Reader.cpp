@@ -4,12 +4,12 @@
 #include <msclr\marshal.h>
 
 
-ZETLab7052::Reader::Reader(void)
+ZETLab7x52::Reader::Reader(void)
 {
 	InitializeComponent();
 }
 
-ZETLab7052::Reader::~Reader()
+ZETLab7x52::Reader::~Reader()
 {
 	if (components)
 	{
@@ -17,7 +17,7 @@ ZETLab7052::Reader::~Reader()
 	}
 }
 
-void ZETLab7052::Reader::InitializeComponent(void)
+void ZETLab7x52::Reader::InitializeComponent(void)
 {
 	System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Reader::typeid));
 	this->ComList = (gcnew System::Windows::Forms::ComboBox());
@@ -35,7 +35,6 @@ void ZETLab7052::Reader::InitializeComponent(void)
 	this->ConfigSaveToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 	this->ExitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 	this->JournalName = (gcnew System::Windows::Forms::TextBox());
-	//this->JournalNameLabel = (gcnew System::Windows::Forms::Label());
 	(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DeviceList))->BeginInit();
 	(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ConnectedDevices))->BeginInit();
 	this->menuStrip1->SuspendLayout();
@@ -202,23 +201,11 @@ void ZETLab7052::Reader::InitializeComponent(void)
 	this->JournalName->TabIndex = 13;
 	this->JournalName->Visible = false;
 	// 
-	// JournalNameLabel
-	// 
-	//this->JournalNameLabel->AutoSize = true;
-	//this->JournalNameLabel->Location = System::Drawing::Point(177, 463);
-	//this->JournalNameLabel->Name = L"JournalNameLabel";
-	//this->JournalNameLabel->Size = System::Drawing::Size(75, 13);
-	//this->JournalNameLabel->TabIndex = 14;
-	//this->JournalNameLabel->Text = L"Имя журнала";
-	//this->JournalNameLabel->UseMnemonic = false;
-	//this->JournalNameLabel->Visible = false;
-	// 
 	// Reader
 	// 
 	this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 	this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 	this->ClientSize = System::Drawing::Size(449, 514);
-	//this->Controls->Add(this->JournalNameLabel);
 	this->Controls->Add(this->JournalName);
 	this->Controls->Add(this->JournalCheck);
 	this->Controls->Add(this->Stop_button);
@@ -231,7 +218,7 @@ void ZETLab7052::Reader::InitializeComponent(void)
 	this->Controls->Add(this->ComList);
 	this->Controls->Add(this->menuStrip1);
 	this->ForeColor = System::Drawing::SystemColors::ControlText;
-	this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+	this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"Logo")));
 	this->MainMenuStrip = this->menuStrip1;
 	this->Name = L"Reader";
 	this->Text = L"ZetLAB 7052 Reader";
@@ -246,7 +233,7 @@ void ZETLab7052::Reader::InitializeComponent(void)
 
 }
 
-System::Void ZETLab7052::Reader::Reader_Load(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::Reader::Reader_Load(System::Object^  sender, System::EventArgs^  e){
 	auto ConnectColumn = gcnew DataGridViewCheckBoxColumn;
 	ConnectColumn->HeaderText = "Подключено";
 	ConnectColumn->Name = "connect";
@@ -305,24 +292,24 @@ System::Void ZETLab7052::Reader::Reader_Load(System::Object^  sender, System::Ev
 	ConnectedDevices->Columns->Add(ZColumn);
 }
 
-System::Void ZETLab7052::Reader::Reader_Shown(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::Reader::Reader_Shown(System::Object^  sender, System::EventArgs^  e){
 	JournalFile = NULL;
 	COMScan();
 }
 
-System::Void ZETLab7052::Reader::COMscan_button_Click(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::Reader::COMscan_button_Click(System::Object^  sender, System::EventArgs^  e){
 	COMScan();
 }
 
-System::Void ZETLab7052::Reader::ChannelScan_button_Click(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::Reader::ChannelScan_button_Click(System::Object^  sender, System::EventArgs^  e){
 	ChannelScan();
 }
 
-System::Void ZETLab7052::Reader::DeviceConnect_button_Click(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::Reader::DeviceConnect_button_Click(System::Object^  sender, System::EventArgs^  e){
 	DeviceConnect();
 }
 
-System::Void ZETLab7052::Reader::Start_button_Click(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::Reader::Start_button_Click(System::Object^  sender, System::EventArgs^  e){
 	Start_button->Enabled = false;
 	JournalCheck->Enabled = false;
 	Stop_button->Enabled = true;
@@ -337,11 +324,11 @@ System::Void ZETLab7052::Reader::Start_button_Click(System::Object^  sender, Sys
 	Measuring->RunWorkerAsync();
 }
 
-System::Void ZETLab7052::Reader::ConfigSaveToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::Reader::ConfigSaveToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
 
 }
 
-System::Void ZETLab7052::Reader::Measuring_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e){
+System::Void ZETLab7x52::Reader::Measuring_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e){
 	Measure buffer;
 	SYSTEMTIME start, now;
 	Act^ Del = gcnew Act(this, &Form::Refresh);
@@ -375,7 +362,7 @@ System::Void ZETLab7052::Reader::Measuring_DoWork(System::Object^  sender, Syste
 }
 
 
-System::Void ZETLab7052::Reader::Stop_button_Click(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::Reader::Stop_button_Click(System::Object^  sender, System::EventArgs^  e){
 	if (Measuring->IsBusy)
 	{
 		Measuring->CancelAsync();
@@ -391,11 +378,11 @@ System::Void ZETLab7052::Reader::Stop_button_Click(System::Object^  sender, Syst
 	DeviceConnect_button->Enabled = true;
 }
 
-System::Void ZETLab7052::Reader::ExitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::Reader::ExitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
 	Application::Exit();
 }
 
-void ZETLab7052::Reader::COMScan(){
+void ZETLab7x52::Reader::COMScan(){
 	ComList->Items->Clear();
 	Port = new COM;
 	int ListSize = Port->ComList->size();
@@ -416,7 +403,7 @@ void ZETLab7052::Reader::COMScan(){
 	}
 };
 
-void ZETLab7052::Reader::ChannelScan(){
+void ZETLab7x52::Reader::ChannelScan(){
 	DeviceList->Rows->Clear();
 	Port->COMName = Port->ComList->at(ComList->SelectedIndex);
 	Port->DeviceList = Port->DeviceScan();
@@ -439,7 +426,7 @@ void ZETLab7052::Reader::ChannelScan(){
 	}
 };
 
-void ZETLab7052::Reader::DeviceConnect(){
+void ZETLab7x52::Reader::DeviceConnect(){
 	Port->ConnectedDevice->clear();
 	ConnectedDevices->Rows->Clear();
 	vector<Device>::iterator It = Port->DeviceList->begin();
@@ -461,7 +448,7 @@ void ZETLab7052::Reader::DeviceConnect(){
 	}
 };
 
-bool ZETLab7052::Reader::PrepareJournal(){
+bool ZETLab7x52::Reader::PrepareJournal(){
 	SYSTEMTIME Time;
 	struct tm * LocalTime;
 	GetLocalTime(&Time);

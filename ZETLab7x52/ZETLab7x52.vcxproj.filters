@@ -22,7 +22,7 @@
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -34,8 +34,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reader.resx">
+    <Image Include="Resources\Logo.ico">
       <Filter>Файлы ресурсов</Filter>
-    </EmbeddedResource>
+    </Image>
   </ItemGroup>
 </Project>

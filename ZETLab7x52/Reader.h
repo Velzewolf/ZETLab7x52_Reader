@@ -4,7 +4,7 @@
 #include "COM.h"
 #include <fstream>
 
-namespace ZETLab7052 {
+namespace ZETLab7x52 {
 
 	using namespace System;
 	using namespace System::ComponentModel;
