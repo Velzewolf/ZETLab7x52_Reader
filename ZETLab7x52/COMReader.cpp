@@ -1,15 +1,15 @@
 #pragma once
-#include "Reader.h"
+#include "COMReader.h"
 #include <vector>
 #include <msclr\marshal.h>
 
 
-ZETLab7x52::Reader::Reader(void)
+ZETLab7x52::COMReader::COMReader(void)
 {
 	InitializeComponent();
 }
 
-ZETLab7x52::Reader::~Reader()
+ZETLab7x52::COMReader::~COMReader()
 {
 	if (components)
 	{
@@ -17,9 +17,9 @@ ZETLab7x52::Reader::~Reader()
 	}
 }
 
-void ZETLab7x52::Reader::InitializeComponent(void)
+void ZETLab7x52::COMReader::InitializeComponent(void)
 {
-	System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Reader::typeid));
+	System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(COMReader::typeid));
 	this->ComList = (gcnew System::Windows::Forms::ComboBox());
 	this->COMscan_button = (gcnew System::Windows::Forms::Button());
 	this->ChannelScan_button = (gcnew System::Windows::Forms::Button());
@@ -57,7 +57,7 @@ void ZETLab7x52::Reader::InitializeComponent(void)
 	this->COMscan_button->TabIndex = 2;
 	this->COMscan_button->Text = L"Поиск COM";
 	this->COMscan_button->UseVisualStyleBackColor = true;
-	this->COMscan_button->Click += gcnew System::EventHandler(this, &Reader::COMscan_button_Click);
+	this->COMscan_button->Click += gcnew System::EventHandler(this, &COMReader::COMscan_button_Click);
 	// 
 	// ChannelScan_button
 	// 
@@ -68,7 +68,7 @@ void ZETLab7x52::Reader::InitializeComponent(void)
 	this->ChannelScan_button->Text = L"Поиск устройств";
 	this->ChannelScan_button->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 	this->ChannelScan_button->UseVisualStyleBackColor = true;
-	this->ChannelScan_button->Click += gcnew System::EventHandler(this, &Reader::ChannelScan_button_Click);
+	this->ChannelScan_button->Click += gcnew System::EventHandler(this, &COMReader::ChannelScan_button_Click);
 	// 
 	// DeviceList
 	// 
@@ -96,7 +96,7 @@ void ZETLab7x52::Reader::InitializeComponent(void)
 	this->DeviceConnect_button->TabIndex = 7;
 	this->DeviceConnect_button->Text = L"Подключиться";
 	this->DeviceConnect_button->UseVisualStyleBackColor = true;
-	this->DeviceConnect_button->Click += gcnew System::EventHandler(this, &Reader::DeviceConnect_button_Click);
+	this->DeviceConnect_button->Click += gcnew System::EventHandler(this, &COMReader::DeviceConnect_button_Click);
 	// 
 	// ConnectedDevices
 	// 
@@ -126,13 +126,13 @@ void ZETLab7x52::Reader::InitializeComponent(void)
 	this->Start_button->Text = L"Запуск";
 	this->Start_button->UseVisualStyleBackColor = true;
 	this->Start_button->Visible = false;
-	this->Start_button->Click += gcnew System::EventHandler(this, &Reader::Start_button_Click);
+	this->Start_button->Click += gcnew System::EventHandler(this, &COMReader::Start_button_Click);
 	// 
 	// Measuring
 	// 
 	this->Measuring->WorkerReportsProgress = true;
 	this->Measuring->WorkerSupportsCancellation = true;
-	this->Measuring->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &Reader::Measuring_DoWork);
+	this->Measuring->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &COMReader::Measuring_DoWork);
 	// 
 	// Stop_button
 	// 
@@ -144,7 +144,7 @@ void ZETLab7x52::Reader::InitializeComponent(void)
 	this->Stop_button->Text = L"Стоп";
 	this->Stop_button->UseVisualStyleBackColor = true;
 	this->Stop_button->Visible = false;
-	this->Stop_button->Click += gcnew System::EventHandler(this, &Reader::Stop_button_Click);
+	this->Stop_button->Click += gcnew System::EventHandler(this, &COMReader::Stop_button_Click);
 	// 
 	// JournalCheck
 	// 
@@ -184,14 +184,14 @@ void ZETLab7x52::Reader::InitializeComponent(void)
 	this->ConfigSaveToolStripMenuItem->Name = L"ConfigSaveToolStripMenuItem";
 	this->ConfigSaveToolStripMenuItem->Size = System::Drawing::Size(224, 22);
 	this->ConfigSaveToolStripMenuItem->Text = L"Сохранение конфигурации";
-	this->ConfigSaveToolStripMenuItem->Click += gcnew System::EventHandler(this, &Reader::ConfigSaveToolStripMenuItem_Click);
+	this->ConfigSaveToolStripMenuItem->Click += gcnew System::EventHandler(this, &COMReader::ConfigSaveToolStripMenuItem_Click);
 	// 
 	// ExitToolStripMenuItem
 	// 
 	this->ExitToolStripMenuItem->Name = L"ExitToolStripMenuItem";
 	this->ExitToolStripMenuItem->Size = System::Drawing::Size(224, 22);
 	this->ExitToolStripMenuItem->Text = L"Выход";
-	this->ExitToolStripMenuItem->Click += gcnew System::EventHandler(this, &Reader::ExitToolStripMenuItem_Click);
+	this->ExitToolStripMenuItem->Click += gcnew System::EventHandler(this, &COMReader::ExitToolStripMenuItem_Click);
 	// 
 	// JournalName
 	// 
@@ -201,7 +201,7 @@ void ZETLab7x52::Reader::InitializeComponent(void)
 	this->JournalName->TabIndex = 13;
 	this->JournalName->Visible = false;
 	// 
-	// Reader
+	// COMReader
 	// 
 	this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 	this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -218,12 +218,12 @@ void ZETLab7x52::Reader::InitializeComponent(void)
 	this->Controls->Add(this->ComList);
 	this->Controls->Add(this->menuStrip1);
 	this->ForeColor = System::Drawing::SystemColors::ControlText;
-	this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"Logo")));
+	this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 	this->MainMenuStrip = this->menuStrip1;
-	this->Name = L"Reader";
+	this->Name = L"COMReader";
 	this->Text = L"ZetLAB 7052 Reader";
-	this->Load += gcnew System::EventHandler(this, &Reader::Reader_Load);
-	this->Shown += gcnew System::EventHandler(this, &Reader::Reader_Shown);
+	this->Load += gcnew System::EventHandler(this, &COMReader::Reader_Load);
+	this->Shown += gcnew System::EventHandler(this, &COMReader::Reader_Shown);
 	(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DeviceList))->EndInit();
 	(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ConnectedDevices))->EndInit();
 	this->menuStrip1->ResumeLayout(false);
@@ -233,7 +233,7 @@ void ZETLab7x52::Reader::InitializeComponent(void)
 
 }
 
-System::Void ZETLab7x52::Reader::Reader_Load(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::COMReader::Reader_Load(System::Object^  sender, System::EventArgs^  e){
 	auto ConnectColumn = gcnew DataGridViewCheckBoxColumn;
 	ConnectColumn->HeaderText = "Подключено";
 	ConnectColumn->Name = "connect";
@@ -292,24 +292,24 @@ System::Void ZETLab7x52::Reader::Reader_Load(System::Object^  sender, System::Ev
 	ConnectedDevices->Columns->Add(ZColumn);
 }
 
-System::Void ZETLab7x52::Reader::Reader_Shown(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::COMReader::Reader_Shown(System::Object^  sender, System::EventArgs^  e){
 	JournalFile = NULL;
 	COMScan();
 }
 
-System::Void ZETLab7x52::Reader::COMscan_button_Click(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::COMReader::COMscan_button_Click(System::Object^  sender, System::EventArgs^  e){
 	COMScan();
 }
 
-System::Void ZETLab7x52::Reader::ChannelScan_button_Click(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::COMReader::ChannelScan_button_Click(System::Object^  sender, System::EventArgs^  e){
 	ChannelScan();
 }
 
-System::Void ZETLab7x52::Reader::DeviceConnect_button_Click(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::COMReader::DeviceConnect_button_Click(System::Object^  sender, System::EventArgs^  e){
 	DeviceConnect();
 }
 
-System::Void ZETLab7x52::Reader::Start_button_Click(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::COMReader::Start_button_Click(System::Object^  sender, System::EventArgs^  e){
 	Start_button->Enabled = false;
 	JournalCheck->Enabled = false;
 	Stop_button->Enabled = true;
@@ -324,11 +324,11 @@ System::Void ZETLab7x52::Reader::Start_button_Click(System::Object^  sender, Sys
 	Measuring->RunWorkerAsync();
 }
 
-System::Void ZETLab7x52::Reader::ConfigSaveToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::COMReader::ConfigSaveToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
 
 }
 
-System::Void ZETLab7x52::Reader::Measuring_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e){
+System::Void ZETLab7x52::COMReader::Measuring_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e){
 	Measure buffer;
 	SYSTEMTIME start, now;
 	Act^ Del = gcnew Act(this, &Form::Refresh);
@@ -362,7 +362,7 @@ System::Void ZETLab7x52::Reader::Measuring_DoWork(System::Object^  sender, Syste
 }
 
 
-System::Void ZETLab7x52::Reader::Stop_button_Click(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::COMReader::Stop_button_Click(System::Object^  sender, System::EventArgs^  e){
 	if (Measuring->IsBusy)
 	{
 		Measuring->CancelAsync();
@@ -378,11 +378,11 @@ System::Void ZETLab7x52::Reader::Stop_button_Click(System::Object^  sender, Syst
 	DeviceConnect_button->Enabled = true;
 }
 
-System::Void ZETLab7x52::Reader::ExitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
+System::Void ZETLab7x52::COMReader::ExitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
 	Application::Exit();
 }
 
-void ZETLab7x52::Reader::COMScan(){
+void ZETLab7x52::COMReader::COMScan(){
 	ComList->Items->Clear();
 	Port = new COM;
 	int ListSize = Port->ComList->size();
@@ -403,7 +403,7 @@ void ZETLab7x52::Reader::COMScan(){
 	}
 };
 
-void ZETLab7x52::Reader::ChannelScan(){
+void ZETLab7x52::COMReader::ChannelScan(){
 	DeviceList->Rows->Clear();
 	Port->COMName = Port->ComList->at(ComList->SelectedIndex);
 	Port->DeviceList = Port->DeviceScan();
@@ -426,7 +426,7 @@ void ZETLab7x52::Reader::ChannelScan(){
 	}
 };
 
-void ZETLab7x52::Reader::DeviceConnect(){
+void ZETLab7x52::COMReader::DeviceConnect(){
 	Port->ConnectedDevice->clear();
 	ConnectedDevices->Rows->Clear();
 	vector<Device>::iterator It = Port->DeviceList->begin();
@@ -448,7 +448,7 @@ void ZETLab7x52::Reader::DeviceConnect(){
 	}
 };
 
-bool ZETLab7x52::Reader::PrepareJournal(){
+bool ZETLab7x52::COMReader::PrepareJournal(){
 	SYSTEMTIME Time;
 	struct tm * LocalTime;
 	GetLocalTime(&Time);

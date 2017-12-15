@@ -1,4 +1,4 @@
-#include "Reader.h"
+#include "MainForm.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -8,6 +8,6 @@ using namespace System::Windows::Forms;
 void main(array<String^>^ args) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-	ZETLab7x52::Reader form;
+	ZETLab7x52::MainForm form;
 	Application::Run(%form);
 }

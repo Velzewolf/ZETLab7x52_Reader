@@ -14,13 +14,13 @@ namespace ZETLab7x52 {
 	using namespace System::Drawing;
 	using namespace System::Threading;
 
-	public ref class Reader : public System::Windows::Forms::Form
+	public ref class COMReader : public System::Windows::Forms::Form
 	{
 	public:
 		COM* Port;
 		ofstream* JournalFile;
 
-		Reader(void);
+		COMReader(void);
 		void COMScan();
 		void ChannelScan();
 		void DeviceConnect();
@@ -28,7 +28,7 @@ namespace ZETLab7x52 {
 		delegate void Act();
 
 	protected:
-		~Reader();
+		~COMReader();
 	private: System::Windows::Forms::ComboBox^  ComList;
 	private: System::Windows::Forms::Button^  COMscan_button;
 	private: System::Windows::Forms::Button^  ChannelScan_button;

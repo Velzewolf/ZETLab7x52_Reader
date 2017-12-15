@@ -81,19 +81,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CANReader.cpp" />
     <ClCompile Include="COM.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Reader.cpp" />
+    <ClCompile Include="MainForm.cpp" />
+    <ClCompile Include="COMReader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CANReader.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="COM.h" />
-    <ClInclude Include="Reader.h">
+    <ClInclude Include="MainForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="COMReader.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reader.resx">
-      <DependentUpon>Reader.h</DependentUpon>
+    <EmbeddedResource Include="CANReader.resx">
+      <DependentUpon>CANReader.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="COMReader.resx">
+      <DependentUpon>COMReader.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -6,8 +6,8 @@
 static const DWORD baudRates[] = {
 	/*CBR_2400,
 	CBR_4800,
-	CBR_9600,
-	CBR_19200,*/
+	CBR_9600,*/
+	CBR_19200,
 	CBR_38400,
 	/*CBR_57600,
 	CBR_115200*/
@@ -278,22 +278,24 @@ vector<Device>* COM::DeviceScan(){
 			}
 			//проход по всем возможным адресам устройств 
 			///////////////////////////////////////////////////////////////////
-			for (unsigned char node = 2; node <= 64; ++node){
-			//формирование запроса
-			vector<unsigned char> requestData = CreateRequest(node, 3, 4, 2);
-			vector<unsigned char> getData = Stream(&requestData, baudRates[baudRateIndex]);
-			if (getData.size() && CheckZET7052(getData))
-			ConnectedDevices->push_back(Device(node, baudRates[baudRateIndex], parities[parityIndex]));
-			}
-			//////////////////////////////////////////////////////////////////////////////////////////
-			//ConnectedDevices->push_back(Device(6, 19200, 0));
-			///////////////////////////////////////////////////////////////////////////////////////////
+			//for (unsigned char node = 2; node <= 64; ++node){
+			////формирование запроса
+			//vector<unsigned char> requestData = CreateRequest(node, 3, 4, 2);
+			//vector<unsigned char> getData = Stream(&requestData, baudRates[baudRateIndex]);
+			//if (getData.size() && CheckZET7052(getData))
+			//ConnectedDevices->push_back(Device(node, baudRates[baudRateIndex], parities[parityIndex]));
+			//}
+			///////////////////////////////////////////////////////////////////
 			++parityIndex;
 		}
 		++baudRateIndex;
 	}
-	if (COMPortClose())
+	if (COMPortClose()){
+		//////////////////////////////////////////////////////////////////////////////////////////
+		ConnectedDevices->push_back(Device(6, 19200, 0));
+		///////////////////////////////////////////////////////////////////////////////////////////
 		return ConnectedDevices;
+	}
 }
 
 float COM::GetAxis(vector<unsigned char> request, DWORD baudRate){
@@ -312,17 +314,17 @@ Measure COM::GetMeasure(Device Dev){
 	vector<unsigned char> request;
 	if (DCBReady(Dev.BaudRate, Dev.Parity)){
 		///////////////////////////////////////////////
-		//double t1 = GetTime();
-		//data.X = t1;
-		//data.Y = t1;
-		//data.Z = t1;
+		double t1 = GetTime();
+		data.X = t1;
+		data.Y = t1;
+		data.Z = t1;
 		//////////////////////////////////////////////
-		request = CreateRequest(Dev.Channel, 3, 20, 2);
-		data.X = GetAxis(request, Dev.BaudRate);
-		request = CreateRequest(Dev.Channel, 3, 58, 2);
-		data.Y = GetAxis(request, Dev.BaudRate);
-		request = CreateRequest(Dev.Channel, 3, 96, 2);
-		data.Z = GetAxis(request, Dev.BaudRate);
+		//request = CreateRequest(Dev.Channel, 3, 20, 2);
+		//data.X = GetAxis(request, Dev.BaudRate);
+		//request = CreateRequest(Dev.Channel, 3, 58, 2);
+		//data.Y = GetAxis(request, Dev.BaudRate);
+		//request = CreateRequest(Dev.Channel, 3, 96, 2);
+		//data.Z = GetAxis(request, Dev.BaudRate);
 		//////////////////////////////////////////////
 		return data;
 		///////////////////////////////////////////////
