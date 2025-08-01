@@ -1,0 +1,29 @@
+[Unit]
+Description=UART Bridge Daemon
+Documentation=man:uart_bridge_daemon(8)
+After=multi-user.target
+Wants=multi-user.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/uart_bridge_daemon
+ExecStop=/bin/kill -TERM $MAINPID
+PIDFile=/var/run/uart_bridge.pid
+Restart=always
+RestartSec=5
+User=root
+Group=dialout
+
+# Security settings
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/run /var/log
+PrivateTmp=true
+
+# Resource limits
+LimitNOFILE=1024
+LimitCORE=0
+
+[Install]
+WantedBy=multi-user.target
